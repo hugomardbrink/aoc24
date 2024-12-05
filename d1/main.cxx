@@ -10,7 +10,7 @@ constexpr const char content[] = {
     #embed "input.txt"
 };
 
-void part_1() {
+int part_1() {
     std::vector<int> left_vec, right_vec;
     std::istringstream iss{content}; 
 
@@ -27,10 +27,10 @@ void part_1() {
         diff_acc += std::abs(left_vec[i] - right_vec[i]);
     }
 
-    cout << diff_acc << endl;
+    return diff_acc;
 }
 
-void part_2() {
+int part_2() {
     std::vector<int> left_vec;
     std::unordered_map<int, int> right_map;
     std::istringstream iss{content}; 
@@ -45,12 +45,17 @@ void part_2() {
     for (auto left_num : left_vec) {
         sim_acc += right_map[left_num] * left_num;
     }
-
-    cout << sim_acc << endl;
+    
+    return sim_acc;
 } 
 
 int main() {
-    part_1();
-    part_2();
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    auto p1_val = part_1();
+    std::chrono::steady_clock::time_point middle = std::chrono::steady_clock::now();
+    auto p2_val = part_2();
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    cout << "Part 1: " << p1_val << " (" << std::chrono::duration_cast<std::chrono::microseconds>(middle - begin).count() << "µs)" << endl;  
+    cout << "Part 2: " << p2_val << " (" << std::chrono::duration_cast<std::chrono::microseconds>(end - middle).count() << "µs)" << endl;
     return 0;
 }

@@ -40,7 +40,7 @@ bool safe(const std::vector<int>& level) {
   return true;
 }
 
-void part_1() {
+int part_1() {
     std::istringstream iss{content}; 
     std::string line;
     int correct_acc{0};
@@ -62,7 +62,7 @@ void part_1() {
             correct_acc++;
         }
     }
-    cout << correct_acc << endl;
+    return correct_acc;
 }
 
 bool safe_dampener(const std::vector<int>& level) {
@@ -80,7 +80,7 @@ bool safe_dampener(const std::vector<int>& level) {
     return false;
 }
 
-void part_2() {
+int part_2() {
     std::istringstream iss{content}; 
     std::string line;
     int correct_acc{0};
@@ -102,11 +102,16 @@ void part_2() {
             correct_acc++;
         }
     }
-    cout << correct_acc << endl;
+    return correct_acc;
 } 
 
 int main() {
-    part_1();
-    part_2();
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    auto p1_val = part_1();
+    std::chrono::steady_clock::time_point middle = std::chrono::steady_clock::now();
+    auto p2_val = part_2();
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    cout << "Part 1: " << p1_val << " (" << std::chrono::duration_cast<std::chrono::microseconds>(middle - begin).count() << "µs)" << endl;  
+    cout << "Part 2: " << p2_val << " (" << std::chrono::duration_cast<std::chrono::microseconds>(end - middle).count() << "µs)" << endl;
     return 0;
 }

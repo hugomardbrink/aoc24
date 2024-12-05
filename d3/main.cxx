@@ -7,7 +7,7 @@ constexpr const char content[] = {
     #embed "input.txt"
 };
 
-void part_1() {
+int part_1() {
     std::string input = std::string(content);
 
     auto acc{0};
@@ -22,10 +22,10 @@ void part_1() {
         input = match.suffix().str(); 
     } 
 
-    cout << acc << endl;
+    return acc;
 }
 
-void part_2() {
+int part_2() {
     std::string input = std::string(content);
 
     auto acc{0};
@@ -46,11 +46,16 @@ void part_2() {
         input = match.suffix().str();
     }
     
-    cout << acc << endl;
+    return acc;
 } 
 
 int main() {
-    part_1();
-    part_2();
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    auto p1_val = part_1();
+    std::chrono::steady_clock::time_point middle = std::chrono::steady_clock::now();
+    auto p2_val = part_2();
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    cout << "Part 1: " << p1_val << " (" << std::chrono::duration_cast<std::chrono::microseconds>(middle - begin).count() << "µs)" << endl;  
+    cout << "Part 2: " << p2_val << " (" << std::chrono::duration_cast<std::chrono::microseconds>(end - middle).count() << "µs)" << endl;
     return 0;
 }
