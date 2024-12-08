@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.20.0)
 
 project(aoc24 LANGUAGES CXX)
 
@@ -12,7 +12,7 @@ set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_BUILD_TYPE Release)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -Wno-c23-extensions")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -Wno-c23-extensions -std=c++23}")
 endif()
 
 set(executables d01 d02 d03 d04 d05 d06 d07 d08 d09 d10 d11 d12 d13 d14 d15 d16 d17 d18 d19 d20 d21 d22 d23 d24 d25)
@@ -30,8 +30,3 @@ if(OpenMP_CXX_FOUND)
     endforeach()
 endif()
 
-set(CMAKE_CXX_CLANG_TIDY
-    clang-tidy;
-    -checks=*;
-    -header-filter=.*;
-)
